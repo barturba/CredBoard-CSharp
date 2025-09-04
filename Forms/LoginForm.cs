@@ -120,23 +120,26 @@ namespace CredBoard.Forms
         {
             if (_isSetupMode)
             {
-                _instructionLabel.Text = "Set up your master password to secure your credentials";
-                _loginButton.Text = "Set Password";
-                _loginButton.BackColor = Color.FromArgb(40, 167, 69);
-                _setupButton.Visible = false;
+                _instructionLabel?.Text = "Set up your master password to secure your credentials";
+                _loginButton?.Text = "Set Password";
+                if (_loginButton != null) _loginButton.BackColor = Color.FromArgb(40, 167, 69);
+                if (_setupButton != null) _setupButton.Visible = false;
             }
             else
             {
-                _instructionLabel.Text = "Enter your master password to access your credentials";
-                _loginButton.Text = "Login";
-                _loginButton.BackColor = Color.FromArgb(0, 123, 255);
-                _setupButton.Visible = true;
+                _instructionLabel?.Text = "Enter your master password to access your credentials";
+                _loginButton?.Text = "Login";
+                if (_loginButton != null) _loginButton.BackColor = Color.FromArgb(0, 123, 255);
+                if (_setupButton != null) _setupButton.Visible = true;
             }
         }
 
         private void ShowPasswordCheckBox_CheckedChanged(object? sender, EventArgs e)
         {
-            _passwordTextBox.PasswordChar = _showPasswordCheckBox.Checked ? '\0' : '•';
+            if (_passwordTextBox != null && _showPasswordCheckBox != null)
+            {
+                _passwordTextBox.PasswordChar = _showPasswordCheckBox.Checked ? '\0' : '•';
+            }
         }
 
         private void PasswordTextBox_KeyDown(object? sender, KeyEventArgs e)

@@ -178,21 +178,24 @@ namespace CredBoard.Forms
 
         private void ShowPasswordCheckBox_CheckedChanged(object? sender, EventArgs e)
         {
-            _passwordTextBox.PasswordChar = _showPasswordCheckBox.Checked ? '\0' : '•';
+            if (_passwordTextBox != null && _showPasswordCheckBox != null)
+            {
+                _passwordTextBox.PasswordChar = _showPasswordCheckBox.Checked ? '\0' : '•';
+            }
         }
 
         private void SaveButton_Click(object? sender, EventArgs e)
         {
             // Validate input
-            var username = _usernameTextBox.Text.Trim();
-            var password = _passwordTextBox.Text.Trim();
-            var website = _websiteTextBox.Text.Trim();
+            var username = _usernameTextBox?.Text.Trim() ?? "";
+            var password = _passwordTextBox?.Text.Trim() ?? "";
+            var website = _websiteTextBox?.Text.Trim() ?? "";
 
             if (string.IsNullOrWhiteSpace(username))
             {
                 MessageBox.Show("Please enter a username or email address.", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _usernameTextBox.Focus();
+                _usernameTextBox?.Focus();
                 this.DialogResult = DialogResult.None;
                 return;
             }
@@ -201,7 +204,7 @@ namespace CredBoard.Forms
             {
                 MessageBox.Show("Please enter a password.", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _passwordTextBox.Focus();
+                _passwordTextBox?.Focus();
                 this.DialogResult = DialogResult.None;
                 return;
             }
@@ -210,7 +213,7 @@ namespace CredBoard.Forms
             {
                 MessageBox.Show("Please enter a website or service name.", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _websiteTextBox.Focus();
+                _websiteTextBox?.Focus();
                 this.DialogResult = DialogResult.None;
                 return;
             }
@@ -219,7 +222,7 @@ namespace CredBoard.Forms
             _login.Username = username;
             _login.Password = password;
             _login.Website = website;
-            _login.Notes = string.IsNullOrWhiteSpace(_notesTextBox.Text) ? null : _notesTextBox.Text.Trim();
+            _login.Notes = string.IsNullOrWhiteSpace(_notesTextBox?.Text) ? null : _notesTextBox?.Text.Trim();
 
             // Set creation date if new login
             if (_originalLogin == null)
