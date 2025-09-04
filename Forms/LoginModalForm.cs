@@ -12,14 +12,14 @@ namespace CredBoard.Forms
     {
         private Login? _originalLogin;
         private Login _login;
-        private TextBox _usernameTextBox;
-        private TextBox _passwordTextBox;
-        private TextBox _websiteTextBox;
-        private TextBox _notesTextBox;
-        private CheckBox _showPasswordCheckBox;
-        private Button _saveButton;
-        private Button _cancelButton;
-        private Label _titleLabel;
+        private TextBox? _usernameTextBox;
+        private TextBox? _passwordTextBox;
+        private TextBox? _websiteTextBox;
+        private TextBox? _notesTextBox;
+        private CheckBox? _showPasswordCheckBox;
+        private Button? _saveButton;
+        private Button? _cancelButton;
+        private Label? _titleLabel;
 
         public Login? Login => _login;
 

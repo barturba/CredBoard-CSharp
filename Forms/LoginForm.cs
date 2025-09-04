@@ -11,12 +11,12 @@ namespace CredBoard.Forms
     public partial class LoginForm : Form
     {
         private readonly AuthManager _authManager;
-        private TextBox _passwordTextBox;
-        private Button _loginButton;
-        private Button _setupButton;
-        private Label _titleLabel;
-        private Label _instructionLabel;
-        private CheckBox _showPasswordCheckBox;
+        private TextBox? _passwordTextBox;
+        private Button? _loginButton;
+        private Button? _setupButton;
+        private Label? _titleLabel;
+        private Label? _instructionLabel;
+        private CheckBox? _showPasswordCheckBox;
         private bool _isSetupMode;
 
         public event Action? OnAuthenticated;

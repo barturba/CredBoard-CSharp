@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnSave": true,
+    "csharp.suppressDotnetInstallWarning": true,
+    "dotnetAcquisitionExtension.enableTelemetry": false
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.csharp",
+      "ms-dotnettools.vscode-dotnet-runtime"
+    ]
+  }
+}

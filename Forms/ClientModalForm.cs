@@ -14,15 +14,15 @@ namespace CredBoard.Forms
     {
         private Client? _originalClient;
         private Client _client;
-        private TextBox _nameTextBox;
-        private TextBox _emailTextBox;
-        private ListBox _loginsListBox;
-        private Button _addLoginButton;
-        private Button _editLoginButton;
-        private Button _deleteLoginButton;
-        private Button _saveButton;
-        private Button _cancelButton;
-        private Label _titleLabel;
+        private TextBox? _nameTextBox;
+        private TextBox? _emailTextBox;
+        private ListBox? _loginsListBox;
+        private Button? _addLoginButton;
+        private Button? _editLoginButton;
+        private Button? _deleteLoginButton;
+        private Button? _saveButton;
+        private Button? _cancelButton;
+        private Label? _titleLabel;
 
         public Client? Client => _client;
 

@@ -16,19 +16,19 @@ namespace CredBoard.Forms
         private readonly AuthManager _authManager;
         private List<Client> _clients;
         private Client? _selectedClient;
-        private TextBox _searchTextBox;
-        private ListBox _clientsListBox;
-        private ListBox _loginsListBox;
-        private Button _addClientButton;
-        private Button _editClientButton;
-        private Button _deleteClientButton;
-        private Button _logoutButton;
-        private Label _titleLabel;
-        private Label _selectedClientLabel;
-        private Panel _searchPanel;
-        private Panel _contentPanel;
-        private Panel _clientsPanel;
-        private Panel _loginsPanel;
+        private TextBox? _searchTextBox;
+        private ListBox? _clientsListBox;
+        private ListBox? _loginsListBox;
+        private Button? _addClientButton;
+        private Button? _editClientButton;
+        private Button? _deleteClientButton;
+        private Button? _logoutButton;
+        private Label? _titleLabel;
+        private Label? _selectedClientLabel;
+        private Panel? _searchPanel;
+        private Panel? _contentPanel;
+        private Panel? _clientsPanel;
+        private Panel? _loginsPanel;
 
         public event Action? OnLogout;
 
