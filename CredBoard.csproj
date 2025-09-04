@@ -6,7 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
     <AssemblyTitle>CredBoard</AssemblyTitle>
     <AssemblyDescription>Secure credential management made simple</AssemblyDescription>
     <AssemblyCompany>CredBoard Team</AssemblyCompany>

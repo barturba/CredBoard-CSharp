@@ -217,6 +217,7 @@ namespace CredBoard.Forms
         {
             if (e.Index < 0) return;
 
+            if (_loginsListBox == null || e.Index >= _loginsListBox.Items.Count) return;
             var login = (Login)_loginsListBox.Items[e.Index];
             var isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
@@ -338,19 +339,19 @@ namespace CredBoard.Forms
         private void SaveButton_Click(object? sender, EventArgs e)
         {
             // Validate input
-            var name = _nameTextBox.Text.Trim();
+            var name = _nameTextBox?.Text.Trim() ?? "";
             if (string.IsNullOrWhiteSpace(name))
             {
                 MessageBox.Show("Please enter a company name.", "Validation Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _nameTextBox.Focus();
+                _nameTextBox?.Focus();
                 this.DialogResult = DialogResult.None;
                 return;
             }
 
             // Update client
             _client.Name = name;
-            _client.Email = string.IsNullOrWhiteSpace(_emailTextBox.Text) ? null : _emailTextBox.Text.Trim();
+            _client.Email = string.IsNullOrWhiteSpace(_emailTextBox?.Text) ? null : _emailTextBox?.Text.Trim();
 
             // Set creation date if new client
             if (_originalClient == null)

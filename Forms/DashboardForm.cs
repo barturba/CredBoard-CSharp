@@ -509,9 +509,9 @@ namespace CredBoard.Forms
                 {
                     _clients.Remove(_selectedClient);
                     _selectedClient = null;
-                    _selectedClientLabel.Text = "Select a company";
-                    _editClientButton.Enabled = false;
-                    _deleteClientButton.Enabled = false;
+                    if (_selectedClientLabel != null) _selectedClientLabel.Text = "Select a company";
+                    if (_editClientButton != null) _editClientButton.Enabled = false;
+                    if (_deleteClientButton != null) _deleteClientButton.Enabled = false;
                     SaveData();
                     UpdateClientsList();
                     UpdateLoginsList();
