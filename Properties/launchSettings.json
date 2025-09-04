@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CredBoard": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    },
+    "WSL": {
+      "commandName": "WSL",
+      "distributionName": ""
+    }
+  }
+}
