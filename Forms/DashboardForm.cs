@@ -215,13 +215,13 @@ namespace CredBoard.Forms
         private void DashboardForm_Resize(object? sender, EventArgs e)
         {
             // Adjust logout button position
-            _logoutButton.Location = new Point(this.ClientSize.Width - 100, 18);
+            if (_logoutButton != null) _logoutButton.Location = new Point(this.ClientSize.Width - 100, 18);
 
             // Adjust add client button position
-            _addClientButton.Location = new Point(this.ClientSize.Width - 120, 12);
+            if (_addClientButton != null) _addClientButton.Location = new Point(this.ClientSize.Width - 120, 12);
 
             // Adjust logins panel size
-            _loginsPanel.Size = new Size(this.ClientSize.Width - 400, this.ClientSize.Height - 130);
+            if (_loginsPanel != null) _loginsPanel.Size = new Size(this.ClientSize.Width - 400, this.ClientSize.Height - 130);
         }
 
         private void LoadData()
@@ -296,20 +296,20 @@ namespace CredBoard.Forms
 
         private void UpdateClientsList()
         {
-            _clientsListBox.Items.Clear();
-            var filteredClients = string.IsNullOrWhiteSpace(_searchTextBox.Text)
+            if (_clientsListBox != null) _clientsListBox.Items.Clear();
+            var filteredClients = string.IsNullOrWhiteSpace(_searchTextBox?.Text)
                 ? _clients
                 : _clients.Where(c =>
-                    c.Name.Contains(_searchTextBox.Text, StringComparison.OrdinalIgnoreCase) ||
-                    (!string.IsNullOrEmpty(c.Email) && c.Email.Contains(_searchTextBox.Text, StringComparison.OrdinalIgnoreCase)))
+                    c.Name.Contains(_searchTextBox?.Text ?? "", StringComparison.OrdinalIgnoreCase) ||
+                    (!string.IsNullOrEmpty(c.Email) && c.Email.Contains(_searchTextBox?.Text ?? "", StringComparison.OrdinalIgnoreCase)))
                   .ToList();
 
             foreach (var client in filteredClients)
             {
-                _clientsListBox.Items.Add(client);
+                if (_clientsListBox != null) _clientsListBox.Items.Add(client);
             }
 
-            if (_clientsListBox.Items.Count > 0 && _clientsListBox.SelectedIndex == -1)
+            if (_clientsListBox != null && _clientsListBox.Items.Count > 0 && _clientsListBox.SelectedIndex == -1)
             {
                 _clientsListBox.SelectedIndex = 0;
             }
@@ -317,13 +317,16 @@ namespace CredBoard.Forms
 
         private void UpdateLoginsList()
         {
-            _loginsListBox.Items.Clear();
-
-            if (_selectedClient != null)
+            if (_loginsListBox != null)
             {
-                foreach (var login in _selectedClient.Logins)
+                _loginsListBox.Items.Clear();
+
+                if (_selectedClient != null)
                 {
-                    _loginsListBox.Items.Add(login);
+                    foreach (var login in _selectedClient.Logins)
+                    {
+                        _loginsListBox.Items.Add(login);
+                    }
                 }
             }
         }

@@ -203,10 +203,13 @@ namespace CredBoard.Forms
 
         private void UpdateLoginsList()
         {
-            _loginsListBox.Items.Clear();
-            foreach (var login in _client.Logins)
+            if (_loginsListBox != null)
             {
-                _loginsListBox.Items.Add(login);
+                _loginsListBox.Items.Clear();
+                foreach (var login in _client.Logins)
+                {
+                    _loginsListBox.Items.Add(login);
+                }
             }
         }
 
@@ -270,9 +273,12 @@ namespace CredBoard.Forms
 
         private void LoginsListBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            var hasSelection = _loginsListBox.SelectedIndex >= 0;
-            _editLoginButton.Enabled = hasSelection;
-            _deleteLoginButton.Enabled = hasSelection;
+            if (_loginsListBox != null)
+            {
+                var hasSelection = _loginsListBox.SelectedIndex >= 0;
+                if (_editLoginButton != null) _editLoginButton.Enabled = hasSelection;
+                if (_deleteLoginButton != null) _deleteLoginButton.Enabled = hasSelection;
+            }
         }
 
         private void AddLoginButton_Click(object? sender, EventArgs e)
