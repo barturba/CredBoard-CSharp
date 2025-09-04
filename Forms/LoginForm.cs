@@ -120,16 +120,22 @@ namespace CredBoard.Forms
         {
             if (_isSetupMode)
             {
-                _instructionLabel?.Text = "Set up your master password to secure your credentials";
-                _loginButton?.Text = "Set Password";
-                if (_loginButton != null) _loginButton.BackColor = Color.FromArgb(40, 167, 69);
+                if (_instructionLabel != null) _instructionLabel.Text = "Set up your master password to secure your credentials";
+                if (_loginButton != null)
+                {
+                    _loginButton.Text = "Set Password";
+                    _loginButton.BackColor = Color.FromArgb(40, 167, 69);
+                }
                 if (_setupButton != null) _setupButton.Visible = false;
             }
             else
             {
-                _instructionLabel?.Text = "Enter your master password to access your credentials";
-                _loginButton?.Text = "Login";
-                if (_loginButton != null) _loginButton.BackColor = Color.FromArgb(0, 123, 255);
+                if (_instructionLabel != null) _instructionLabel.Text = "Enter your master password to access your credentials";
+                if (_loginButton != null)
+                {
+                    _loginButton.Text = "Login";
+                    _loginButton.BackColor = Color.FromArgb(0, 123, 255);
+                }
                 if (_setupButton != null) _setupButton.Visible = true;
             }
         }

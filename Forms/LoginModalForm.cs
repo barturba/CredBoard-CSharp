@@ -222,7 +222,7 @@ namespace CredBoard.Forms
             _login.Username = username;
             _login.Password = password;
             _login.Website = website;
-            _login.Notes = string.IsNullOrWhiteSpace(_notesTextBox?.Text) ? null : _notesTextBox?.Text.Trim();
+            _login.Notes = string.IsNullOrWhiteSpace(_notesTextBox?.Text) ? null : (_notesTextBox?.Text.Trim());
 
             // Set creation date if new login
             if (_originalLogin == null)
