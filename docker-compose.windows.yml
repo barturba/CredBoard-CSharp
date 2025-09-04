@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  credboard-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.windows
+    platform: windows
+    volumes:
+      # Mount the executable from the build artifacts
+      - ./CredBoard.exe:/app/CredBoard.exe:ro
+    command: powershell -Command "Write-Host 'Container ready for testing'; Get-ChildItem /app"
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
