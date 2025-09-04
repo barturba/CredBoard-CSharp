@@ -1,0 +1,45 @@
+name: Test Application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-core:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Test on Windows
+      run: |
+        # Verify we're on Windows
+        echo "Running on: $RUNNER_OS"
+
+        # Build for testing
+        dotnet build -c Debug --no-restore
+
+        # Run unit tests
+        dotnet test CredBoard.Tests/CredBoard.Tests.csproj --verbosity normal
+
+        # Test that the Windows Forms application can be built
+        dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./test-build
+        if [ -f "./test-build/CredBoard.exe" ]; then
+          echo "✅ Windows executable built successfully"
+          ls -lh ./test-build/CredBoard.exe
+        else
+          echo "❌ Windows executable build failed"
+          exit 1
+        fi
