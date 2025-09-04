@@ -333,12 +333,12 @@ namespace CredBoard.Forms
 
         private void ClientsListBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            if (_clientsListBox.SelectedItem is Client client)
+            if (_clientsListBox?.SelectedItem is Client client)
             {
                 _selectedClient = client;
-                _selectedClientLabel.Text = $"{client.Name} Logins";
-                _editClientButton.Enabled = true;
-                _deleteClientButton.Enabled = true;
+                if (_selectedClientLabel != null) _selectedClientLabel.Text = $"{client.Name} Logins";
+                if (_editClientButton != null) _editClientButton.Enabled = true;
+                if (_deleteClientButton != null) _deleteClientButton.Enabled = true;
                 UpdateLoginsList();
             }
         }
@@ -347,7 +347,9 @@ namespace CredBoard.Forms
         {
             if (e.Index < 0) return;
 
-            var client = (Client)_clientsListBox.Items[e.Index];
+            if (_clientsListBox != null && e.Index < _clientsListBox.Items.Count)
+            {
+                var client = (Client)_clientsListBox.Items[e.Index];
             var isSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
             // Background
@@ -390,6 +392,7 @@ namespace CredBoard.Forms
                         e.Bounds.Right - countSize.Width - 10, e.Bounds.Top + 30);
                 }
             }
+            }
 
             e.DrawFocusRectangle();
         }
@@ -398,7 +401,9 @@ namespace CredBoard.Forms
         {
             if (e.Index < 0) return;
 
-            var login = (Login)_loginsListBox.Items[e.Index];
+            if (_loginsListBox != null && e.Index < _loginsListBox.Items.Count)
+            {
+                var login = (Login)_loginsListBox.Items[e.Index];
 
             // Background
             e.DrawBackground();
@@ -437,6 +442,7 @@ namespace CredBoard.Forms
                             e.Bounds.Left + 200, e.Bounds.Top + 28);
                     }
                 }
+            }
             }
 
             e.DrawFocusRectangle();
@@ -496,6 +502,8 @@ namespace CredBoard.Forms
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
+                // Ensure _selectedClient is still not null before using it below
+                if (_selectedClient == null) return;
 
                 if (result == DialogResult.Yes)
                 {

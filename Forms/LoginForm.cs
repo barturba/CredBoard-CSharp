@@ -171,13 +171,16 @@ namespace CredBoard.Forms
         {
             _isSetupMode = true;
             UpdateUI();
-            _passwordTextBox.Clear();
-            _passwordTextBox.Focus();
+            if (_passwordTextBox != null)
+            {
+                _passwordTextBox.Clear();
+                _passwordTextBox.Focus();
+            }
         }
 
         private void SetupPassword()
         {
-            var password = _passwordTextBox.Text.Trim();
+            var password = _passwordTextBox?.Text.Trim() ?? "";
 
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -205,7 +208,7 @@ namespace CredBoard.Forms
 
         private void PerformLogin()
         {
-            var password = _passwordTextBox.Text.Trim();
+            var password = _passwordTextBox?.Text.Trim() ?? "";
 
             if (string.IsNullOrWhiteSpace(password))
             {
