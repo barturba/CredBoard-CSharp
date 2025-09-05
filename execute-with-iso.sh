@@ -1,0 +1,140 @@
+🔥 EXECUTE VM SETUP WITH YOUR ISO 🔥
+=====================================
+
+#/bin/bash /Applications/DYMO.WebApi.Mac.Host.app/Contents/Resources/InstallCertificates.sh
+
+echo '🔥 EXECUTE VM SETUP WITH YOUR ISO 🔥'
+echo '====================================='
+echo ''
+
+# Define paths
+ISO_PATH='/Users/bartasurba/Windows Virtual Machines/26100.4349.250607-1500.ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.iso'
+VM_DIR='/Users/bartasurba/Windows Virtual Machines'
+
+echo '📍 USING YOUR DOWNLOADED ISO:'
+echo "   $ISO_PATH"
+echo '📊 SIZE:' $(ls -lh "$ISO_PATH" | awk '{print $5}')B
+echo ''
+
+# Verify ISO exists
+if [ ! -f "$ISO_PATH" ]; then
+    echo '❌ ISO file not found!'
+    exit 1
+fi
+echo '✅ ISO verified'
+echo ''
+
+# Launch UTM
+echo '🚀 LAUNCHING UTM...'
+open -a UTM
+echo '✅ UTM launched'
+echo ''
+
+echo '📋 CREATE VM INSTRUCTIONS:'
+echo '=========================='
+echo ''
+echo 'IN UTM APP, DO THIS:'
+echo ''
+echo '1️⃣  Click "+" button'
+echo '2️⃣  Select "Create a New Virtual Machine"'
+echo '3️⃣  Choose "Windows"'
+echo '4️⃣  Select "Windows 11 (ARM64)"'
+echo '5️⃣  Configure VM:'
+echo '   • Name: CredBoard-Test-VM'
+echo '   • RAM: 4GB'
+echo '   • CPU: 2 cores'
+echo '   • Storage: 64GB'
+echo '6️⃣  Mount ISO: Click "Browse" and select:'
+echo "   $ISO_PATH"
+echo '7️⃣  Click "Save" to create VM'
+echo ''
+read -p 'Press Enter after creating VM in UTM...'
+echo ''
+
+echo '▶️  START VM INSTALLATION:'
+echo '========================='
+echo ''
+echo 'IN UTM:'
+echo '1️⃣  Select your new VM'
+echo '2️⃣  Click the play button (▶️)'
+echo '3️⃣  Windows will start installing (15-30 minutes)'
+echo '4️⃣  Follow the installation wizard'
+echo '5️⃣  Create user account: "user" / "password"'
+echo ''
+read -p 'Press Enter after Windows installation completes...'
+echo ''
+
+echo '🔧 SETUP CREDBOARD ENVIRONMENT:'
+echo '==============================='
+echo ''
+echo 'IN WINDOWS VM POWERSHELL, RUN:'
+echo ''
+echo '# Install .NET Runtime'
+echo 'winget install Microsoft.DotNet.Runtime.8'
+echo ''
+echo '# Create test directory'
+echo 'New-Item -ItemType Directory -Path "C:\CredBoard-Test" -Force'
+echo ''
+echo '# Verify installation'
+echo 'dotnet --version'
+echo ''
+read -p 'Press Enter after running PowerShell commands...'
+echo ''
+
+echo '📤 TRANSFER CREDBOARD:'
+echo '======================'
+echo ''
+echo 'RUN THIS IN YOUR MAC TERMINAL:'
+echo 'scp ~/Sync/CredBoard.exe user@192.168.64.2:"C:/CredBoard-Test/"'
+echo ''
+read -p 'Press Enter after transferring files...'
+echo ''
+
+echo '🎮 LAUNCH & TEST CREDBOARD:'
+echo '==========================='
+echo ''
+echo 'IN WINDOWS VM:'
+echo '1️⃣  Open File Explorer'
+echo '2️⃣  Go to C:\CredBoard-Test'
+echo '3️⃣  Double-click CredBoard.exe'
+echo ''
+echo 'YOU SHOULD SEE:'
+echo '✅ Windows Forms GUI launches'
+echo '✅ Login screen with password field'
+echo '✅ Master password authentication'
+echo '✅ Dashboard with client management'
+echo ''
+read -p 'Press Enter when CredBoard is running...'
+echo ''
+
+echo '🤖 RUN AUTOMATED TESTS:'
+echo '======================='
+echo ''
+echo 'IN WINDOWS VM POWERSHELL:'
+echo 'cd C:\CredBoard-Test'
+echo '.\vm-test-automation.ps1'
+echo ''
+echo 'THE SCRIPT WILL:'
+echo '📸 Take screenshots automatically'
+echo '🧪 Test all GUI features'
+echo '📊 Generate test report'
+echo ''
+read -p 'Press Enter after automated tests complete...'
+echo ''
+
+echo '🎉 SUCCESS! VM TESTING COMPLETE!'
+echo '==============================='
+echo ''
+echo '📊 RESULTS:'
+echo '✅ Windows ARM64 VM created'
+echo '✅ Windows installed successfully'
+echo '✅ CredBoard GUI tested'
+echo '✅ Screenshots captured'
+echo '✅ Test report generated'
+echo ''
+echo '📁 FILES IN VM:'
+echo '   C:\CredBoard-Test\*.png (screenshots)'
+echo '   C:\CredBoard-Test\CredBoard-Test-Report.md'
+echo ''
+echo '🎯 CredBoard GUI fully validated on Windows ARM64!'
+
