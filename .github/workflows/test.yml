@@ -26,7 +26,7 @@ jobs:
     - name: Test on Windows
       run: |
         # Verify we're on Windows
-        echo "Running on: $RUNNER_OS"
+        Write-Host "Running on: $env:RUNNER_OS"
 
         # Build for testing
         dotnet build -c Debug --no-restore
@@ -36,10 +36,14 @@ jobs:
 
         # Test that the Windows Forms application can be built
         dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./test-build
-        if [ -f "./test-build/CredBoard.exe" ]; then
-          echo "✅ Windows executable built successfully"
-          ls -lh ./test-build/CredBoard.exe
-        else
-          echo "❌ Windows executable build failed"
+
+        # Check if executable was built successfully
+        if (Test-Path "./test-build/CredBoard.exe") {
+          $fileInfo = Get-Item "./test-build/CredBoard.exe"
+          Write-Host "✅ Windows executable built successfully"
+          Write-Host "   Size: $([math]::Round($fileInfo.Length / 1MB, 2)) MB"
+          Write-Host "   Path: $($fileInfo.FullName)"
+        } else {
+          Write-Host "❌ Windows executable build failed"
           exit 1
-        fi
+        }
