@@ -47,3 +47,9 @@ jobs:
           Write-Host "❌ Windows executable build failed"
           exit 1
         }
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: CredBoard-Windows-Executable
+        path: ./test-build/CredBoard.exe
