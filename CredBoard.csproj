@@ -33,4 +33,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Program-Console.cs" />
+  </ItemGroup>
+
 </Project>
